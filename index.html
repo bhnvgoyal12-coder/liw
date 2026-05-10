@@ -589,18 +589,104 @@
   .btn-primary, .btn-gold { background: var(--gold); color: var(--navy); }
   .btn-primary:hover, .btn-gold:hover { background: var(--gold-soft); }
 
+  /* ===== Tablet ===== */
   @media (max-width: 960px) {
+    .container { padding: 0 20px; }
+    .nav-inner { padding: 14px 20px; }
+    .hero { padding: 60px 0 80px; }
+    .hero-tech .hero-copy h1 { font-size: 2.6rem; }
+    .hero-tech .lead { max-width: 100%; }
+    .hero-visual { min-height: auto; margin-top: 28px; }
     .stats-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
     .moments-grid { grid-template-columns: 1fr 1fr; }
     .goals-grid { grid-template-columns: 1fr 1fr; }
-    .alloc-grid, .growth-grid { grid-template-columns: 1fr; gap: 40px; }
     .vstep-track { grid-template-columns: 1fr 1fr; gap: 32px; }
     .vstep:not(:last-child)::after { display: none; }
+    .milestone-tag { right: 0; top: 16px; min-width: 130px; padding: 10px 13px; }
+    .insight-card { left: 0; bottom: -8px; max-width: 200px; padding: 11px 13px; }
+
+    /* Mobile nav drawer */
+    .navbar { position: sticky; top: 0; }
+    .nav-inner { position: relative; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: #fff;
+      padding: 8px 20px 16px;
+      border-top: 1px solid #ece8df;
+      box-shadow: 0 12px 24px rgba(10,16,40,0.08);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 12px 0; border-bottom: 1px solid #f5f1e6; }
+    .nav-links a:last-child { border-bottom: none; }
+    .nav-inner > a.btn { padding: 10px 18px; font-size: 0.85rem; }
+    .creds-row { grid-template-columns: repeat(2, 1fr); gap: 6px 0; }
+    .cred-item:not(:last-child)::after { display: none; }
+    .cred-item { padding: 12px 14px; border-bottom: 1px solid #f5f1e6; }
+    .creds-row .cred-item:nth-last-child(-n+2) { border-bottom: none; }
   }
+
+  /* ===== Phone ===== */
   @media (max-width: 600px) {
+    .container { padding: 0 16px; }
+    .section { padding: 56px 0; }
+    .topbar { font-size: 0.78rem; }
+    .topbar-inner { flex-wrap: wrap; gap: 6px; }
+    .topbar-left span { margin-right: 12px; }
+    .nav-inner { padding: 12px 16px; }
+
+    .hero { padding: 48px 0 64px; }
+    .hero-tech .hero-copy h1 { font-size: 2rem; }
+    .hero-tech .lead { font-size: 0.98rem; }
+    .hero-actions { flex-direction: column; align-items: stretch; gap: 10px; }
+    .hero-actions .btn { width: 100%; text-align: center; }
+    .pill-tag { font-size: 0.72rem; }
+    .company-logos { margin-top: 28px; padding-top: 18px; }
+    .logos-row { gap: 8px; }
+    .logo-chip { font-size: 0.74rem; padding: 4px 10px; }
+
+    .stats { padding: 36px 0; }
+    .stat-num { font-size: 2rem; }
+    .stat-label { font-size: 0.82rem; }
+
+    .section-head { margin-bottom: 36px; }
+    .section-head h2 { font-size: 1.7rem; }
     .moments-grid, .goals-grid { grid-template-columns: 1fr; }
     .stats-grid { grid-template-columns: 1fr 1fr; }
-    .hero-tech .hero-copy h1 { font-size: 2.2rem; }
+    .moment, .service-card, .testimonial { padding: 26px 22px; }
+    .goal-card { padding: 28px 20px; }
+
+    .creds-row { grid-template-columns: 1fr; }
+    .creds-row .cred-item { border-bottom: 1px solid #f5f1e6; }
+    .creds-row .cred-item:last-child { border-bottom: none; }
+
+    .vstep-icon { width: 88px; height: 88px; font-size: 2.1rem; }
+    .vstep h3 { font-size: 1rem; }
+
+    .plan-card { max-width: 320px; }
+    .plan-metric .value { font-size: 1.7rem; }
+    .milestone-tag { right: 4px; top: 8px; padding: 8px 12px; font-size: 0.85rem; min-width: 0; }
+    .milestone-tag strong { font-size: 0.82rem; }
+    .insight-card { left: 4px; bottom: -12px; max-width: 180px; padding: 9px 12px; }
+
+    .final-cta { padding: 64px 0; }
+    .contact-inner h2 { font-size: 1.9rem; }
+    .contact-actions { flex-direction: column; align-items: stretch; gap: 10px; }
+    .contact-actions .btn { width: 100%; text-align: center; }
+
+    .footer { padding: 48px 0 24px; }
+    .footer-grid { gap: 28px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+
+  /* ===== Tiny phones ===== */
+  @media (max-width: 380px) {
+    .hero-tech .hero-copy h1 { font-size: 1.8rem; }
+    .milestone-tag, .insight-card { display: none; }
+    .plan-card { max-width: 100%; }
   }
 </style>
 </head>
@@ -634,7 +720,7 @@
       <a href="#contact">Contact</a>
     </nav>
     <a href="#contact" class="btn btn-primary">Book a Chat</a>
-    <button class="hamburger" aria-label="Menu">☰</button>
+    <button class="hamburger" id="navToggle" aria-label="Menu" aria-expanded="false">☰</button>
   </div>
 </header>
 
@@ -1113,5 +1199,22 @@
   </div>
 </footer>
 
+<script>
+  (function () {
+    var toggle = document.getElementById('navToggle');
+    var links = document.querySelector('.nav-links');
+    if (!toggle || !links) return;
+    toggle.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    links.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+</script>
 </body>
 </html>
